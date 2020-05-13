@@ -6,13 +6,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 import { sizing } from '@material-ui/system';
 import IconButton from '@material-ui/core/IconButton';
 import ReplayIcon from '@material-ui/icons/Replay';
 
 
-class Elephant extends Component{
+class ElephantCard extends Component{
     
     
     render(){
@@ -24,13 +24,13 @@ class Elephant extends Component{
 
         // else{
             return(
-                <Box width="50%" height="50%">
+                <Container maxWidth='xs'>
                     <Card>
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 alt="elephant image"
-                                height="500"
+                                height="150"
                                 image={this.props.elephantData.image}
                                 title="elephant image"
                             />
@@ -39,10 +39,10 @@ class Elephant extends Component{
                                     {this.props.elephantData.name}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    Species: {this.props.elephantData.species}
-                                    Sex: {this.props.elephantData.sex}
-                                    Fictional: {this.props.elephantData.fictional}
-                                    Date of birth: {this.props.elephantData.dob}
+                                    <p>Species: {this.props.elephantData.species}</p>
+                                    <p>Sex: {this.props.elephantData.sex}</p>
+                                    <p>Fictional: {this.props.elephantData.fictional}</p>
+                                    <p>Date of birth: {this.props.elephantData.dob}</p>
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -52,10 +52,10 @@ class Elephant extends Component{
                             </CardActions>
                         </CardActionArea>
                     </Card>
-                </Box>
+                </Container>
             )
         }
     }
 
 
-export default Elephant;
+export default ElephantCard;

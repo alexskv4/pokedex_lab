@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Elephant from './Elephant';
+import ElephantCard from './ElephantCard';
 import { render } from '@testing-library/react';
-
+import Grid3x3 from './Grid3x3'
 
 class ElephantView extends Component{
     constructor(props){
@@ -44,7 +44,7 @@ class ElephantView extends Component{
     render(){
         return(
 
-            <Elephant elephantData = {this.state.elephant} loadElephant = {this.loadElephant}/>
+            <Grid3x3 elephantData = {this.state.elephant} loadElephant = {this.loadElephant}/>
 
         );           
     }
