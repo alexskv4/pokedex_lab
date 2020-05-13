@@ -26,7 +26,6 @@ class ElephantCard extends Component{
             return(
                 <Container maxWidth='xs'>
                     <Card>
-                        <CardActionArea>
                             <CardMedia
                                 component="img"
                                 alt="elephant image"
@@ -39,18 +38,25 @@ class ElephantCard extends Component{
                                     {this.props.elephantData.name}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                    <p>Species: {this.props.elephantData.species}</p>
-                                    <p>Sex: {this.props.elephantData.sex}</p>
-                                    <p>Fictional: {this.props.elephantData.fictional}</p>
-                                    <p>Date of birth: {this.props.elephantData.dob}</p>
+                                    Species: {this.props.elephantData.species}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    Sex: {this.props.elephantData.sex}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    Fictional: {this.props.elephantData.fictional}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">   
+                                    Date of birth: {this.props.elephantData.dob}
                                 </Typography>
                             </CardContent>
+           
                             <CardActions>
-                                <IconButton onClick={this.props.loadElephant}>
+                                <IconButton onClick={this.props.loadElephant.bind(this, this.props.id)}>
                                     <ReplayIcon/>
                                 </IconButton>
                             </CardActions>
-                        </CardActionArea>
+                      
                     </Card>
                 </Container>
             )
