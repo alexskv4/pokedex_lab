@@ -51,7 +51,7 @@ class PokemonView extends Component{
                 <div>
                     <h1>Name: {this.state.pokemon.name}</h1>
                     <h1>Weight: {this.state.pokemon.weight}</h1>
-                    <h1>Height: {this.state.pokemon.Height}</h1>
+                    <h1>Height: {this.state.pokemon.height}</h1>
                 </div>
             );
         }
