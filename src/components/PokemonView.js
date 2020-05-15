@@ -1,23 +1,41 @@
 import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField'
+import PokemonTextfield from './PokemonTextfield'
+import PokemonCard from './PokemonCard'
 
 class PokemonView extends Component{
     constructor(props){
         super(props);
         this.state = {
-            pokemon: [],
+            pokemon: null,
+            error: {
+                hasError: false,
+                errorMessage: null,           
+            },
         }
+        this.loadPokemon = this.loadPokemon.bind(this);
     }
 
-    loadPokemon(){
+    clearError = () => {
+        this.setState({
+            error: {
+                hasError: false, 
+                helpertext: null,
+            }
+        })
+    }
 
-        fetch("https://api.codetabs.com/v1/proxy?quest=https://pokeapi.co/api/v2/pokemon/pikachu/",
+    loadPokemon(pokemonName){
+
+        var url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName; 
+        console.log(url)
+        
+        fetch(url,
         {
             method:"GET",
             headers:{"origin":"localhost"},
         
         })
-
         .then(res => {return res.json()})
         .then(resData => {this.setState({
             pokemon: 
@@ -28,33 +46,25 @@ class PokemonView extends Component{
                 }
             }
         )})
+        .catch(error => {this.setState({
+            error:
+                {
+                    hasError: true,
+                    errorMessage: "Please enter a valid Pokemon",
+                }
+        })})
         
-        console.log(this.state.pokemon);
+        // console.log(this.state.pokemon);
 
-    }
-
-    componentDidMount(){
-        this.loadPokemon();
     }
 
     render(){
-
-        if (this.state.pokemon[0] == null){
-            return(
-                <TextField id="filled-basic" label="Filled" variant="filled" />
-            )
-        }
-
-
-        else {
-            return(
-                <div>
-                    <h1>Name: {this.state.pokemon.name}</h1>
-                    <h1>Weight: {this.state.pokemon.weight}</h1>
-                    <h1>Height: {this.state.pokemon.height}</h1>
-                </div>
-            );
-        }
+        return(
+            <div>
+                <PokemonTextfield loadPokemon = {this.loadPokemon} error = {this.state.error} clearError = {this.clearError}/>
+                <PokemonCard pokemon = {this.state.pokemon}/>
+            </div>
+        )
     }
 
 }
