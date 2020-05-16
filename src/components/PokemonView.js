@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import TextField from '@material-ui/core/TextField'
-import PokemonTextfield from './PokemonTextfield'
-import PokemonCard from './PokemonCard'
+import React, {Component} from 'react';
+import TextField from '@material-ui/core/TextField';
+import PokemonTextfield from './PokemonTextfield';
+import PokemonCard from './PokemonCard';
 
 class PokemonView extends Component{
     constructor(props){
@@ -43,6 +43,7 @@ class PokemonView extends Component{
                     name: resData["name"], 
                     weight: resData["weight"], 
                     height: resData["height"],
+                    images: resData["sprites"],
                 }
             }
         )})
