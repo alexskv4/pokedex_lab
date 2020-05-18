@@ -38,7 +38,7 @@ class PokemonTextfield extends Component{
                     helperText = {this.props.error.errorMessage}
                     onKeyDown = {this.keyPress}
                 />
-                <Button onClick={this.handleOnClick}>Search</Button>
+                <Button onClick={this.handleOnClick} variant = "contained" color = "primary">Search</Button>
             </div>
         )
     }

@@ -4,8 +4,9 @@ import Container from '@material-ui/core/Container';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import { useTheme } from '@material-ui/core/styles';
 
 class PokemonCard extends Component{
     constructor(props){
