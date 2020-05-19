@@ -11,7 +11,7 @@ class PokemonView extends Component{
         super(props);
         this.state = {
             pokemon: null,
-            darkMode: false,
+            theme: null,
             error: {
                 hasError: false,
                 errorMessage: null,           
@@ -19,23 +19,21 @@ class PokemonView extends Component{
         }
         this.loadPokemon = this.loadPokemon.bind(this);
         
-        this.theme = createMuiTheme({
+        this.darkTheme = createMuiTheme({
             palette:{
-                type: this.darkMode ? "dark" : "light",
+                type: "dark",
             },
-        });       
+        });
+        
+        this.lightTheme = createMuiTheme({
+            palette:{
+                type: "light"
+            },
+        });
     }
 
-    changeTheme = event => {
-        if (event.target.checked == false){
-            this.setState({
-                darkMode: true,
-            })
-        }
-        else {
-            this.setState({
-                darkMode: false,
-        })}      
+    changeTheme = (event) => {
+        this.setState({theme : (event.target.checked ? this.darkTheme : this.lightTheme)})
     }
     
     clearError = () => {
@@ -83,10 +81,10 @@ class PokemonView extends Component{
 
     render(){
         return(
-            <ThemeProvider theme = {this.theme}>
+            <ThemeProvider theme = {this.state.theme}>
                 <CssBaseline>
                     <div>
-                        <Switch checked = {this.state.darkMode} onChange = {this.changeTheme}/>
+                        <Switch color = "primary" onChange = {this.changeTheme}/>
                         <PokemonTextfield loadPokemon = {this.loadPokemon} error = {this.state.error} clearError = {this.clearError}/>
                         <PokemonCard pokemon = {this.state.pokemon}/>
                     </div>
