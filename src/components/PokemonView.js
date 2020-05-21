@@ -5,6 +5,9 @@ import PokemonCard from './PokemonCard';
 import { createMuiTheme, ThemeProvider, useTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Divider from '@material-ui/core/Divider'
 
 class PokemonView extends Component{
     constructor(props){
@@ -84,8 +87,13 @@ class PokemonView extends Component{
             <ThemeProvider theme = {this.state.theme}>
                 <CssBaseline>
                     <div>
-                        <Switch color = "primary" onChange = {this.changeTheme}/>
-                        <PokemonTextfield loadPokemon = {this.loadPokemon} error = {this.state.error} clearError = {this.clearError}/>
+                        <h1>
+                            <Grid container spacing = {4} justify = "center" alignItems = "center">
+                                <Grid item><FormControlLabel control = {<Switch color = "primary" onChange = {this.changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
+                                <Grid item><PokemonTextfield loadPokemon = {this.loadPokemon} error = {this.state.error} clearError = {this.clearError}/></Grid>
+                            </Grid>
+                        </h1>
+                        <h1><Divider/></h1>
                         <PokemonCard pokemon = {this.state.pokemon}/>
                     </div>
                 </CssBaseline>

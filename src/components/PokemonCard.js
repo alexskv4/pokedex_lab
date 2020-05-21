@@ -12,23 +12,35 @@ class PokemonCard extends Component{
     constructor(props){
         super(props);
         this.state = {
-            pokemonImageSelected : null
+            pokemonSelected:{
+                image : null,
+                selectorText : "front_default",
+
+            }
         };
     }
     
     handleOnChange = event => {
         this.setState({
-            pokemonImageSelected : this.props.pokemon.images[event.target.value]
+            pokemonSelected: {
+                image : this.props.pokemon.images[event.target.value],
+                selectorText : event.target.value,
+            }
+
         });
          
-        console.log(this.state.pokemonImageSelected)
+        //console.log(this.state.pokemonSelected.image)
     }
 
 
     componentDidUpdate(prevProps) {
         if (this.props.pokemon != prevProps.pokemon){
             this.setState({
-                pokemonImageSelected : this.props.pokemon.images.front_default});
+                pokemonSelected : {
+                    image : this.props.pokemon.images.front_default,
+                    selectorText : "front_default",
+                }
+            });
         }   
     }
 
@@ -39,7 +51,7 @@ class PokemonCard extends Component{
                     <Card>
                         
                         <CardActions>
-                            <Select onChange = {this.handleOnChange} defaultValue = "front_default">
+                            <Select onChange = {this.handleOnChange} value = {this.state.pokemonSelected.selectorText} defaultValue = "front_default" variant = "outlined">
                                 <MenuItem value = "front_default">Regular front</MenuItem>
                                 <MenuItem value = "back_default">Regular back</MenuItem>
                             </Select>
@@ -49,7 +61,7 @@ class PokemonCard extends Component{
                             component = "img"
                             alt = "pokemon image"
                             height = "100%"
-                            image = {this.state.pokemonImageSelected}
+                            image = {this.state.pokemonSelected.image}
                             title = "pokemon image"
                         />
                         <CardContent>
