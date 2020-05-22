@@ -1,21 +1,24 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import ElephantCard from './ElephantCard';
 import { render } from '@testing-library/react';
 import ElephantGrid from './ElephantGrid'
 
-class ElephantView extends Component{
-    constructor(props){
+function ElephantView(props) {
+    // constructor(props){
 
-        super(props);
-        this.state = {
-            elephants: [],
-        };
-        this.loadElephant = this.loadElephant.bind(this);
-    }
+    //     super(props);
+    //     this.state = {
+    //         elephants: [],
+    //     };
+    //     //this.loadElephant = this.loadElephant.bind(this);
+    // }
+    const [elephants, setElephants] = useState([]);
+
+    var elephantArr = [];
     
-    loadElephant(id, e){
+    var loadElephant = (id, e) => {
 
-        // console.log(id, e);
+        console.log(id, e);
         
         fetch('https://api.codetabs.com/v1/proxy?quest=https://elephant-api.herokuapp.com/elephants/random', 
         {
@@ -31,40 +34,35 @@ class ElephantView extends Component{
         .then(resData => {
 
             if (id == null){
-                this.setState({
-                    elephants: [...this.state.elephants, resData[0]]
-                }) 
+                elephantArr.push(resData[0]);
+                setElephants([...elephantArr]);
             }
-            else{
-          
-                var data = [...this.state.elephants]
+            else{ 
+                var data = [...elephants]
                 data[id] = resData[0]
-
-                this.setState({                    
-                        elephants: data
-                    })
-
+                setElephants(data)
             }
-
-            // console.log(this.state.elephants);
+           
+         
 
         });
     }
     
     
-    componentDidMount(){
+    useEffect(() => {
         for(var i = 0; i < 9; i++){
-            this.loadElephant();
-        }
-    }
+            loadElephant();
+            
+        } 
+    }, []);
 
-    render(){
-        return(
 
-            <ElephantGrid elephants = {this.state.elephants} loadElephant = {this.loadElephant}/>
+    return(
 
-        );           
-    }
+        <ElephantGrid elephants = {elephants} loadElephant = {loadElephant}/>
+
+    );           
+
 
 }
 
