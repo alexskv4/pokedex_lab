@@ -11,56 +11,46 @@ import IconButton from '@material-ui/core/IconButton';
 import ReplayIcon from '@material-ui/icons/Replay';
 
 
-class ElephantCard extends Component{
+function ElephantCard(props) {
+       
+    return(
+        <Container maxWidth='xs'>
+            <Card>
+                    <CardMedia
+                        component="img"
+                        alt="elephant image"
+                        height="150"
+                        image={props.elephantData.image}
+                        title="elephant image"
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {props.elephantData.name}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            Species: {props.elephantData.species}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            Sex: {props.elephantData.sex}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            Fictional: {props.elephantData.fictional}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">   
+                            Date of birth: {props.elephantData.dob}
+                        </Typography>
+                    </CardContent>
     
-    
-    render(){
-        // var {isLoaded, Elephant}=this.state;
-
-        // if (!isLoaded){
-        //     return <div>Loading...</div>
-        // }
-
-        // else{
-            return(
-                <Container maxWidth='xs'>
-                    <Card>
-                            <CardMedia
-                                component="img"
-                                alt="elephant image"
-                                height="150"
-                                image={this.props.elephantData.image}
-                                title="elephant image"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    {this.props.elephantData.name}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    Species: {this.props.elephantData.species}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    Sex: {this.props.elephantData.sex}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    Fictional: {this.props.elephantData.fictional}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">   
-                                    Date of birth: {this.props.elephantData.dob}
-                                </Typography>
-                            </CardContent>
-           
-                            <CardActions>
-                                <IconButton onClick={this.props.loadElephant.bind(this, this.props.id)}>
-                                    <ReplayIcon/>
-                                </IconButton>
-                            </CardActions>
-                      
-                    </Card>
-                </Container>
-            )
-        }
-    }
+                    <CardActions>
+                        <IconButton onClick={props.loadElephant.bind(this, props.id)}>
+                            <ReplayIcon/>
+                        </IconButton>
+                    </CardActions>
+                
+            </Card>
+        </Container>
+    )       
+}
 
 
 export default ElephantCard;

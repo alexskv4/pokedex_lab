@@ -4,14 +4,7 @@ import { render } from '@testing-library/react';
 import ElephantGrid from './ElephantGrid'
 
 function ElephantView(props) {
-    // constructor(props){
 
-    //     super(props);
-    //     this.state = {
-    //         elephants: [],
-    //     };
-    //     //this.loadElephant = this.loadElephant.bind(this);
-    // }
     const [elephants, setElephants] = useState([]);
 
     var elephantArr = [];
