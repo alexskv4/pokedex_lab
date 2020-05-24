@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,73 +8,61 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 
-class PokemonCard extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            pokemonSelected:{
-                image : null,
-                selectorText : "front_default",
+function PokemonCard(props) {
 
-            }
-        };
-    }
+    const [pokemonSelected, setPokemonSelected] = useState({
+        image: null,
+        selectorText: "front_default",
+    })
     
-    handleOnChange = event => {
-        this.setState({
-            pokemonSelected: {
-                image : this.props.pokemon.images[event.target.value],
-                selectorText : event.target.value,
-            }
+    const prevPokemonRef = useRef(props.pokemon);
 
+    var handleOnChange = (event) => {
+        setPokemonSelected({
+                image : props.pokemon.images[event.target.value],
+                selectorText : event.target.value,
         });
-         
-        //console.log(this.state.pokemonSelected.image)
     }
 
-
-    componentDidUpdate(prevProps) {
-        if (this.props.pokemon != prevProps.pokemon){
-            this.setState({
-                pokemonSelected : {
-                    image : this.props.pokemon.images.front_default,
+    useEffect(() => {
+        if (props.pokemon != prevPokemonRef.current){
+            setPokemonSelected(
+                {
+                    image : props.pokemon.images.front_default,
                     selectorText : "front_default",
                 }
-            });
-        }   
-    }
-
-    render(){
-        if (this.props.pokemon){
-            return(
-                <Container maxWidth = "xs">
-                    <Card>
-                        
-                        <CardActions>
-                            <Select onChange = {this.handleOnChange} value = {this.state.pokemonSelected.selectorText} defaultValue = "front_default" variant = "outlined">
-                                <MenuItem value = "front_default">Regular front</MenuItem>
-                                <MenuItem value = "back_default">Regular back</MenuItem>
-                            </Select>
-                        </CardActions>
-                        
-                        <CardMedia
-                            component = "img"
-                            alt = "pokemon image"
-                            height = "100%"
-                            image = {this.state.pokemonSelected.image}
-                            title = "pokemon image"
-                        />
-                        <CardContent>
-                            <p>Name: {this.props.pokemon.name}</p>
-                            <p>Weight: {this.props.pokemon.weight}</p>
-                            <p>Height: {this.props.pokemon.height}</p>
-                        </CardContent>
-                    </Card>
-                </Container>
             )
         }
-        return null;
+    }, [props.pokemon]);
+
+    if (props.pokemon){
+        return(
+            <Container maxWidth = "xs">
+                <Card>
+                    <CardActions>
+                        <Select onChange = {handleOnChange} value = {pokemonSelected.selectorText} defaultValue = "front_default" variant = "outlined">
+                            <MenuItem value = "front_default">Regular front</MenuItem>
+                            <MenuItem value = "back_default">Regular back</MenuItem>
+                        </Select>
+                    </CardActions>
+                    
+                    <CardMedia
+                        component = "img"
+                        alt = "pokemon image"
+                        height = "100%"
+                        image = {pokemonSelected.image}
+                        title = "pokemon image"
+                    />
+                    <CardContent>
+                        <p>Name: {props.pokemon.name}</p>
+                        <p>Weight: {props.pokemon.weight}</p>
+                        <p>Height: {props.pokemon.height}</p>
+                    </CardContent>
+                </Card>
+            </Container>
+        )
     }
+    return null;
 }
 
 

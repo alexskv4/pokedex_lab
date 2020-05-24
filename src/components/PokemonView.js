@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import PokemonTextfield from './PokemonTextfield';
 import PokemonCard from './PokemonCard';
@@ -9,46 +9,39 @@ import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Divider from '@material-ui/core/Divider'
 
-class PokemonView extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            pokemon: null,
-            theme: null,
-            error: {
-                hasError: false,
-                errorMessage: null,           
-            },
-        }
-        this.loadPokemon = this.loadPokemon.bind(this);
-        
-        this.darkTheme = createMuiTheme({
-            palette:{
-                type: "dark",
-            },
-        });
-        
-        this.lightTheme = createMuiTheme({
-            palette:{
-                type: "light"
-            },
-        });
-    }
+function PokemonView(props) {
 
-    changeTheme = (event) => {
-        this.setState({theme : (event.target.checked ? this.darkTheme : this.lightTheme)})
+    const [pokemon, setPokemon] = useState(null);
+    const [theme, setTheme] = useState(null);
+    const [error, setError] = useState({
+        hasError: false,
+        errorMessage: null,
+    });
+    
+    var darkTheme = createMuiTheme({
+        palette:{
+            type: "dark",
+        },
+    });
+    
+    var lightTheme = createMuiTheme({
+        palette:{
+            type: "light"
+        },
+    });
+
+    var changeTheme = (event) => {
+        setTheme(event.target.checked ? darkTheme : lightTheme)
     }
     
-    clearError = () => {
-        this.setState({
-            error: {
-                hasError: false, 
-                helpertext: null,
-            }
+    var clearError = () => {
+        setError({
+            hasError: false, 
+            helpertext: null, 
         })
     }
 
-    loadPokemon(pokemonName){
+    var loadPokemon = (pokemonName) => {
 
         var url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName; 
         console.log(url)
@@ -60,47 +53,38 @@ class PokemonView extends Component{
         
         })
         .then(res => {return res.json()})
-        .then(resData => {this.setState({
-            pokemon: 
+        .then(resData => {setPokemon(
                 {
                     name: resData["name"], 
                     weight: resData["weight"], 
                     height: resData["height"],
                     images: resData["sprites"],
                 }
-            }
         )})
-        .catch(error => {this.setState({
-            error:
+        .catch(error => {setError(
                 {
                     hasError: true,
                     errorMessage: "Please enter a valid Pokemon",
                 }
-        })})
-        
-        // console.log(this.state.pokemon);
-
+        )})
     }
 
-    render(){
-        return(
-            <ThemeProvider theme = {this.state.theme}>
-                <CssBaseline>
-                    <div>
-                        <h1>
-                            <Grid container spacing = {4} justify = "center" alignItems = "center">
-                                <Grid item><FormControlLabel control = {<Switch color = "primary" onChange = {this.changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
-                                <Grid item><PokemonTextfield loadPokemon = {this.loadPokemon} error = {this.state.error} clearError = {this.clearError}/></Grid>
-                            </Grid>
-                        </h1>
-                        <h1><Divider/></h1>
-                        <PokemonCard pokemon = {this.state.pokemon}/>
-                    </div>
-                </CssBaseline>
-            </ThemeProvider>
-        )
-    }
-
+    return(
+        <ThemeProvider theme = {theme}>
+            <CssBaseline>
+                <div>
+                    <h1>
+                        <Grid container spacing = {4} justify = "center" alignItems = "center">
+                            <Grid item><FormControlLabel control = {<Switch color = "primary" onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
+                            <Grid item><PokemonTextfield loadPokemon = {loadPokemon} error = {error} clearError = {clearError}/></Grid>
+                        </Grid>
+                    </h1>
+                    <h1><Divider/></h1>
+                    <PokemonCard pokemon = {pokemon}/>
+                </div>
+            </CssBaseline>
+        </ThemeProvider>
+    )
 }
 
 export default PokemonView;
