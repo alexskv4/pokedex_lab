@@ -10,6 +10,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Divider from '@material-ui/core/Divider'
 
 
+// interface PokemonData {
+//     name?: string
+//     weight?: string
+//     height?: string
+//     images?: string
+// }
+
 const PokemonView: React.FC = () => {
 
     var darkTheme = createMuiTheme({
@@ -23,8 +30,9 @@ const PokemonView: React.FC = () => {
             type: "light"
         },
     });
-
-    const [pokemon, setPokemon] = useState(Object (null));
+    
+    //let pokemonData : PokemonData = {};
+    const [pokemon, setPokemon] = useState({});
     const [theme, setTheme] = useState(lightTheme);
     const [error, setError] = useState({
         hasError: false,
@@ -45,7 +53,7 @@ const PokemonView: React.FC = () => {
     var loadPokemon = (pokemonName: string) => {
 
         var url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName; 
-        console.log(url)
+        
         
         fetch(url,
         {
@@ -54,7 +62,9 @@ const PokemonView: React.FC = () => {
         
         })
         .then(res => {return res.json()})
-        .then(resData => {setPokemon(
+        .then(resData => {
+            console.log(resData)
+            setPokemon(
                 {
                     name: resData["name"], 
                     weight: resData["weight"], 

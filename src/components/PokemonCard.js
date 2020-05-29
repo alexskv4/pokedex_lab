@@ -26,6 +26,8 @@ function PokemonCard(props) {
 
     useEffect(() => {
         if (props.pokemon != prevPokemonRef.current){
+            console.log(props.pokemon)
+            console.log(prevPokemonRef.current)
             setPokemonSelected(
                 {
                     image : props.pokemon.images.front_default,
