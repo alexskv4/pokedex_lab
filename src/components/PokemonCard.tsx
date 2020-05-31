@@ -8,16 +8,26 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 
-function PokemonCard(props) {
+interface PokemonCardProps {
+    pokemon: {
+        images?: any,
+        name?: string,
+        weight?: string,
+        height?: string,
+    },
+
+}
+
+const PokemonCard: React.FC <PokemonCardProps> = (props) => {
 
     const [pokemonSelected, setPokemonSelected] = useState({
-        image: null,
+        image: "",
         selectorText: "front_default",
     })
     
     const prevPokemonRef = useRef(props.pokemon);
 
-    var handleOnChange = (event) => {
+    var handleOnChange = (event: any) => {
         setPokemonSelected({
                 image : props.pokemon.images[event.target.value],
                 selectorText : event.target.value,
