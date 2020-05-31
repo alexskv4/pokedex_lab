@@ -13,14 +13,18 @@ const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
 
     const searchInputRef = useRef <HTMLInputElement>();
 
+    let handleOnChange = () => {
+        props.clearError()
+    }
+
     let handleOnClick = (event: any) => {
         event.preventDefault();
-        props.loadPokemon(searchInputRef.current!.value)
+        props.loadPokemon(searchInputRef.current?.value)
     }
 
     let keyPress = (event: any) => {
         if(event.keyCode == 13){
-            props.loadPokemon(searchInputRef.current!.value)
+            props.loadPokemon(searchInputRef.current?.value)
         }
     }
 
@@ -29,6 +33,7 @@ const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
             <Grid container spacing = {2} alignItems = "center">
                 <Grid item>
                     <TextField
+                        onChange = {handleOnChange}
                         inputRef={searchInputRef} 
                         error = {props.error.hasError}
                         id = "filled-basic" 
