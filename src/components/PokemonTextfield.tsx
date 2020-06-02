@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, MouseEvent} from 'react';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
@@ -17,7 +17,7 @@ const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
         props.clearError()
     }
 
-    let handleOnClick = (event: any) => {
+    let handleOnClick = (event: MouseEvent) => {
         event.preventDefault();
         props.loadPokemon(searchInputRef.current?.value)
     }
