@@ -1,4 +1,4 @@
-import React, {useRef, MouseEvent} from 'react';
+import React, {useRef, MouseEvent, KeyboardEvent} from 'react';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
@@ -22,7 +22,7 @@ const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
         props.loadPokemon(searchInputRef.current?.value)
     }
 
-    let keyPress = (event: any) => {
+    let keyPress = (event: KeyboardEvent) => {
         if(event.keyCode == 13){
             props.loadPokemon(searchInputRef.current?.value)
         }

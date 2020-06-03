@@ -31,7 +31,6 @@ const PokemonView: React.FC = () => {
         },
     });
     
-    //let pokemonData : PokemonData = {};
     const [pokemon, setPokemon] = useState({});
     const [theme, setTheme] = useState(lightTheme);
     const [error, setError] = useState({
@@ -64,12 +63,15 @@ const PokemonView: React.FC = () => {
         .then(res => {return res.json()})
         .then(resData => {
             console.log(resData)
+            console.log(resData.abilities[0].ability.name)
+            
             setPokemon(
                 {
                     name: resData["name"], 
                     weight: resData["weight"], 
                     height: resData["height"],
                     images: resData["sprites"],
+                    ability: resData.abilities[0].ability.name
                 }
         )})
         .catch(error => {setError(
