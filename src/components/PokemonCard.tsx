@@ -14,7 +14,7 @@ interface PokemonCardProps {
         name?: string,
         weight?: string,
         height?: string,
-        ability?: string,
+        abilities?: string,
     },
 
 }
@@ -72,7 +72,7 @@ const PokemonCard: React.FC <PokemonCardProps> = (props) => {
                         <p>Name: {props.pokemon.name}</p>
                         <p>Weight: {props.pokemon.weight}</p>
                         <p>Height: {props.pokemon.height}</p>
-                        <p>Ability: {props.pokemon.ability}</p>
+                        <p>Abilities: {props.pokemon.abilities}</p>
                     </CardContent>
                 </Card>
             </Container>
