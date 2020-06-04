@@ -63,10 +63,8 @@ const PokemonView: React.FC = () => {
         .then(res => {return res.json()})
         .then(resData => {
             console.log(resData)
-            let abilityArr: string[] = []
-            resData.abilities.forEach(function(item: any) {abilityArr.push(item.ability.name)})
 
-            
+            const abilityArr = resData.abilities.map(function(item: any) {return item.ability.name})
 
             setPokemon(
                 {
