@@ -9,14 +9,6 @@ import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Divider from '@material-ui/core/Divider'
 
-
-// interface PokemonData {
-//     name?: string
-//     weight?: string
-//     height?: string
-//     images?: string
-// }
-
 const PokemonView: React.FC = () => {
 
     var darkTheme = createMuiTheme({
@@ -89,7 +81,7 @@ const PokemonView: React.FC = () => {
                 <div>
                     <h1>
                         <Grid container spacing = {4} justify = "center" alignItems = "center">
-                            <Grid item><FormControlLabel control = {<Switch color = "primary" onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
+                            <Grid item><FormControlLabel control = {<Switch color = 'primary' onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
                             <Grid item><PokemonTextfield loadPokemon = {loadPokemon} error = {error} clearError = {clearError}/></Grid>
                         </Grid>
                     </h1>

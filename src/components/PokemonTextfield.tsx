@@ -1,13 +1,20 @@
 import React, {useRef, MouseEvent, KeyboardEvent} from 'react';
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import { styled } from '@material-ui/core/styles';
 
 interface PokemonTextFieldProps {
     clearError: Function,
     loadPokemon: Function,
     error: any,
 }
+
+const StyledButton = styled(Button) ({
+    background: 'linear-gradient(45deg, #FF0000 30%, #FFFFFF 50%)',
+    color: 'black',
+    fontWeight: 'bolder',
+});
 
 const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
 
@@ -43,7 +50,7 @@ const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
                         onKeyDown = {keyPress}
                     />
                 </Grid>
-                <Grid item><Button onClick={handleOnClick} variant = "contained" color = "primary">Search</Button></Grid>
+                <Grid item><StyledButton onClick={handleOnClick} variant = "contained" color = "primary">Search</StyledButton></Grid>
             </Grid>
         </div>
     )
