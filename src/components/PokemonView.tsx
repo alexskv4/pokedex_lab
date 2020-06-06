@@ -7,19 +7,34 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Divider from '@material-ui/core/Divider'
+import Divider from '@material-ui/core/Divider';
+import {red, grey} from '@material-ui/core/colors';
+import PressStart2P from './fonts/PressStart2P';
 
 const PokemonView: React.FC = () => {
 
     var darkTheme = createMuiTheme({
+        typography:{
+            fontFamily:"PressStart2P",
+            fontWeightRegular: "bolder"
+        },
+
         palette:{
+            primary: red,
+            secondary: grey,
             type: "dark",
         },
     });
     
     var lightTheme = createMuiTheme({
+        typography:{
+            fontWeightRegular: "bolder"
+        },
+
         palette:{
-            type: "light"
+            primary: red,
+            secondary: grey,
+            type: "light",
         },
     });
     

@@ -1,0 +1,1 @@
+declare module './components/fonts/PressStart2Ps'
