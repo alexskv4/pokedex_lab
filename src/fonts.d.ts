@@ -1,1 +1,1 @@
-declare module './components/fonts/PressStart2Ps'
+declare module '*.ttf';

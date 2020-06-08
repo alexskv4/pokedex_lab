@@ -54,10 +54,10 @@ const PokemonCard: React.FC <PokemonCardProps> = (props) => {
                 <Card>
                     <CardActions>
                         <Select onChange = {handleOnChange} value = {pokemonSelected.selectorText} defaultValue = "front_default" variant = "outlined">
-                            <MenuItem value = "front_default">Regular front</MenuItem>
-                            <MenuItem value = "back_default">Regular back</MenuItem>
-                            <MenuItem value = "front_shiny">Shiny front</MenuItem>
-                            <MenuItem value = "back_shiny">Shiny back</MenuItem>
+                                <MenuItem value = "front_default">Regular front</MenuItem>
+                                <MenuItem value = "back_default">Regular back</MenuItem>
+                                <MenuItem value = "front_shiny">Shiny front</MenuItem>
+                                <MenuItem value = "back_shiny">Shiny back</MenuItem>
                         </Select>
                     </CardActions>
                     

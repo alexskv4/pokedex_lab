@@ -9,14 +9,30 @@ import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Divider from '@material-ui/core/Divider';
 import {red, grey} from '@material-ui/core/colors';
-import PressStart2P from './fonts/PressStart2P';
+import PressStart2P from './fonts/PressStart2P.ttf';
+
+
+const pressStart2P = {
+    fontFamily: 'PressStart2P',
+    src: `local('PressStart2P'), url(${PressStart2P}) format('truetype')`
+}
+
 
 const PokemonView: React.FC = () => {
 
     var darkTheme = createMuiTheme({
         typography:{
-            fontFamily:"PressStart2P",
-            fontWeightRegular: "bolder"
+            fontFamily: 'PressStart2P',
+            fontSize: 12
+            // fontWeightRegular: "bolder"
+        },
+
+        overrides: {
+            MuiCssBaseline: {
+                '@global': {
+                    '@font-face': [pressStart2P]
+                }
+            }
         },
 
         palette:{
@@ -28,7 +44,17 @@ const PokemonView: React.FC = () => {
     
     var lightTheme = createMuiTheme({
         typography:{
-            fontWeightRegular: "bolder"
+            fontFamily: 'PressStart2P',
+            fontSize: 12
+            //fontWeightRegular: "bolder"
+        },
+
+        overrides: {
+            MuiCssBaseline: {
+                '@global': {
+                    '@font-face': [pressStart2P]
+                }
+            }
         },
 
         palette:{
