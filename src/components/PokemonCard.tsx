@@ -49,15 +49,24 @@ const PokemonCard: React.FC <PokemonCardProps> = (props) => {
     }, [props.pokemon]);
 
     if (props.pokemon.name){
+        
+        let selectValuesArray = [];
+        for(let i in props.pokemon.images)
+            if (props.pokemon.images[i]) {
+                selectValuesArray.push(i);
+            }
+        // let selectValuesArray = Object.keys(props.pokemon.images);
+
+        const pokemonSelectValues = selectValuesArray.map((v: any) => 
+            <MenuItem value = {v}> {v} </MenuItem>
+        );
+
         return(
             <Container maxWidth = "xs">
                 <Card>
                     <CardActions>
                         <Select onChange = {handleOnChange} value = {pokemonSelected.selectorText} defaultValue = "front_default" variant = "outlined">
-                                <MenuItem value = "front_default">Regular front</MenuItem>
-                                <MenuItem value = "back_default">Regular back</MenuItem>
-                                <MenuItem value = "front_shiny">Shiny front</MenuItem>
-                                <MenuItem value = "back_shiny">Shiny back</MenuItem>
+                                {pokemonSelectValues}
                         </Select>
                     </CardActions>
                     
