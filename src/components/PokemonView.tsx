@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import PokemonTextfield from './PokemonTextfield';
-import PokemonCard from './PokemonCard';
+import PokemonGrid from './PokemonGrid';
 import { createMuiTheme, ThemeProvider, useTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
@@ -19,6 +19,10 @@ const pressStart2P = {
 
 
 const PokemonView: React.FC = () => {
+
+    // const [pokemons, setPokemons] = useState(Array<Object>([]));
+
+    var pokemonArr: Array<object> = [];
 
     var darkTheme = createMuiTheme({
         typography:{
@@ -64,7 +68,7 @@ const PokemonView: React.FC = () => {
         },
     });
     
-    const [pokemon, setPokemon] = useState({});
+    const [pokemons, setPokemons] = useState(Array<Object>([]));
     const [theme, setTheme] = useState(lightTheme);
     const [error, setError] = useState({
         hasError: false,
@@ -98,8 +102,8 @@ const PokemonView: React.FC = () => {
             console.log(resData)
 
             const abilityArr = resData.abilities.map(function(item: any) {return item.ability.name})
-
-            setPokemon(
+            
+            pokemonArr.push(
                 {
                     name: resData["name"], 
                     weight: resData["weight"], 
@@ -107,7 +111,15 @@ const PokemonView: React.FC = () => {
                     images: resData["sprites"],
                     abilities: abilityArr.toString(),
                 }
-        )})
+            );
+            
+            // console.log(pokemonArr)
+
+            setPokemons(
+                [...pokemonArr]
+            )
+            console.log(pokemons)
+        })
         .catch(error => {setError(
                 {
                     hasError: true,
@@ -127,7 +139,7 @@ const PokemonView: React.FC = () => {
                         </Grid>
                     </h1>
                     <h1><Divider/></h1>
-                    <PokemonCard pokemon = {pokemon}/>
+                    <PokemonGrid pokemonArr = {pokemons}/>
                 </div>
             </CssBaseline>
         </ThemeProvider>

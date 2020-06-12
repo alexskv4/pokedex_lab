@@ -13,7 +13,8 @@ const ElephantGrid: React.FC <ElephantGridProps> = (props) => {
     const elephantItems = props.elephants.map((elephant, index) => 
         <GridListTile key={index}>
             <ElephantCard id = {index} elephantData = {elephant} loadElephant = {props.loadElephant}/>
-        </GridListTile>)
+        </GridListTile>
+    )
 
     return(
         <GridList cols={3} cellHeight={450}>

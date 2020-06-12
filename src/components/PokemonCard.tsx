@@ -15,7 +15,10 @@ interface PokemonCardProps {
         weight?: string,
         height?: string,
         abilities?: string,
-    },
+        id?: Number,
+    } 
+    
+    
 
 }
 
