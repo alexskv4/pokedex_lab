@@ -14,12 +14,10 @@ interface PokemonCardProps {
         name?: string,
         weight?: string,
         height?: string,
-        abilities?: string,
         id?: Number,
+        abilities?: string,
+        
     } 
-    
-    
-
 }
 
 const PokemonCard: React.FC <PokemonCardProps> = (props) => {
@@ -39,16 +37,14 @@ const PokemonCard: React.FC <PokemonCardProps> = (props) => {
     }
 
     useEffect(() => {
-        if (props.pokemon != prevPokemonRef.current){
-            console.log(props.pokemon)
-            console.log(prevPokemonRef.current)
+        console.log(props.pokemon)
+        console.log(prevPokemonRef.current)
             setPokemonSelected(
                 {
                     image : props.pokemon.images.front_default,
                     selectorText : "front_default",
                 }
             )
-        }
     }, [props.pokemon]);
 
     if (props.pokemon.name){
@@ -60,8 +56,8 @@ const PokemonCard: React.FC <PokemonCardProps> = (props) => {
             }
         // let selectValuesArray = Object.keys(props.pokemon.images);
 
-        const pokemonSelectValues = selectValuesArray.map((v: any) => 
-            <MenuItem value = {v}> {v} </MenuItem>
+        const pokemonSelectValues = selectValuesArray.map((v: any, index) => 
+            <MenuItem key = {index} value = {v}> {v} </MenuItem>
         );
 
         return(

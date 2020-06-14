@@ -22,8 +22,8 @@ const PokemonView: React.FC = () => {
 
     // const [pokemons, setPokemons] = useState(Array<Object>([]));
 
-    var pokemonArr: Array<object> = [];
-
+    let pokemonArr: Array<object> = [];
+    console.log(pokemonArr)
     var darkTheme = createMuiTheme({
         typography:{
             fontFamily: 'PressStart2P',
@@ -68,7 +68,7 @@ const PokemonView: React.FC = () => {
         },
     });
     
-    const [pokemons, setPokemons] = useState(Array<Object>([]));
+    const [pokemons, setPokemons] = useState(Array<Object>());
     const [theme, setTheme] = useState(lightTheme);
     const [error, setError] = useState({
         hasError: false,
@@ -99,7 +99,7 @@ const PokemonView: React.FC = () => {
         })
         .then(res => {return res.json()})
         .then(resData => {
-            console.log(resData)
+            //console.log(resData)
 
             const abilityArr = resData.abilities.map(function(item: any) {return item.ability.name})
             
@@ -109,16 +109,17 @@ const PokemonView: React.FC = () => {
                     weight: resData["weight"], 
                     height: resData["height"],
                     images: resData["sprites"],
+                    id: resData["id"],
                     abilities: abilityArr.toString(),
                 }
             );
             
-            // console.log(pokemonArr)
+            console.log(pokemonArr)
 
             setPokemons(
                 [...pokemonArr]
             )
-            console.log(pokemons)
+            //console.log(pokemons)
         })
         .catch(error => {setError(
                 {

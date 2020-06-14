@@ -4,20 +4,22 @@ import GridListTile from '@material-ui/core/GridListTile';
 import PokemonCard from './PokemonCard';
 
 interface PokemonGridProps {
-    pokemonArr: Array<Object>
+    pokemonArr: Array<any>
     // loadPokemon: Function
 }
 
 
 const PokemonGrid: React.FC <PokemonGridProps> = (props) => {
 
-    const pokemonItems = props.pokemonArr.map((pokemon, index) => 
-        <GridListTile key={index}>
+
+    console.log(props.pokemonArr)
+    const pokemonItems = props.pokemonArr.map((pokemon) => 
+        <GridListTile key={pokemon.id}>
             <PokemonCard pokemon = {pokemon}/>
         </GridListTile>)
-
+    // console.log(pokemonItems)
     return(
-        <GridList cols={3} cellHeight={450}>
+        <GridList cols={3} cellHeight={600}>
             {pokemonItems}
         </GridList>
     )
