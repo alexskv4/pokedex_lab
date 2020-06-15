@@ -114,12 +114,12 @@ const PokemonView: React.FC = () => {
                 }
             );
             
-            console.log(pokemonArr)
+            // console.log(pokemonArr)
 
             setPokemons(
-                [...pokemonArr]
-            )
-            //console.log(pokemons)
+                [...pokemons, ...pokemonArr]
+            );
+            // console.log(pokemons)
         })
         .catch(error => {setError(
                 {

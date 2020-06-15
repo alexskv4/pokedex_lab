@@ -19,7 +19,7 @@ const PokemonGrid: React.FC <PokemonGridProps> = (props) => {
         </GridListTile>)
     // console.log(pokemonItems)
     return(
-        <GridList cols={3} cellHeight={600}>
+        <GridList cols={3} cellHeight={650}>
             {pokemonItems}
         </GridList>
     )
