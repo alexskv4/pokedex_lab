@@ -5,7 +5,7 @@ import PokemonCard from './PokemonCard';
 
 interface PokemonGridProps {
     pokemonArr: Array<any>
-    // loadPokemon: Function
+    removePokemon: Function
 }
 
 
@@ -15,7 +15,7 @@ const PokemonGrid: React.FC <PokemonGridProps> = (props) => {
     console.log(props.pokemonArr)
     const pokemonItems = props.pokemonArr.map((pokemon) => 
         <GridListTile key={pokemon.id}>
-            <PokemonCard pokemon = {pokemon}/>
+            <PokemonCard removePokemon = {props.removePokemon} pokemon = {pokemon}/>
         </GridListTile>)
     // console.log(pokemonItems)
     return(

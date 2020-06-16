@@ -7,6 +7,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import ClearIcon from '@material-ui/icons/Clear';
 
 interface PokemonCardProps {
     pokemon: {
@@ -18,6 +20,7 @@ interface PokemonCardProps {
         abilities?: string,
         
     } 
+    removePokemon: Function
 }
 
 const PokemonCard: React.FC <PokemonCardProps> = (props) => {
@@ -67,6 +70,9 @@ const PokemonCard: React.FC <PokemonCardProps> = (props) => {
                         <Select onChange = {handleOnChange} value = {pokemonSelected.selectorText} defaultValue = "front_default" variant = "outlined">
                                 {pokemonSelectValues}
                         </Select>
+                        <IconButton onClick = {props.removePokemon.bind(PokemonCard, props.pokemon)}>
+                            <ClearIcon/>
+                        </IconButton>
                     </CardActions>
                     
                     <CardMedia

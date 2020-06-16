@@ -129,6 +129,14 @@ const PokemonView: React.FC = () => {
         )})
     }
 
+    let removePokemon = (pokemon: object, e: any) => {
+        console.log(pokemon, e);
+        let data: object[] = [...pokemons]
+        const index = data.indexOf(pokemon)
+        data.splice(index, 1);
+        setPokemons(data)
+    }
+
     return(
         <ThemeProvider theme = {theme}>
             <CssBaseline>
@@ -140,7 +148,7 @@ const PokemonView: React.FC = () => {
                         </Grid>
                     </h1>
                     <h1><Divider/></h1>
-                    <PokemonGrid pokemonArr = {pokemons}/>
+                    <PokemonGrid removePokemon = {removePokemon} pokemonArr = {pokemons}/>
                 </div>
             </CssBaseline>
         </ThemeProvider>
