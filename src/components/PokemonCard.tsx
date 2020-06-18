@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
+import Grid from '@material-ui/core/Grid';
 
 interface PokemonCardProps {
     pokemon: {
@@ -66,13 +67,19 @@ const PokemonCard: React.FC <PokemonCardProps> = (props) => {
         return(
             <Container maxWidth = "xs">
                 <Card>
-                    <CardActions>
-                        <Select onChange = {handleOnChange} value = {pokemonSelected.selectorText} defaultValue = "front_default" variant = "outlined">
-                                {pokemonSelectValues}
-                        </Select>
-                        <IconButton onClick = {props.removePokemon.bind(PokemonCard, props.pokemon)}>
-                            <ClearIcon/>
-                        </IconButton>
+                    <CardActions disableSpacing>
+                        <Grid container justify = "space-between" alignItems = "center">
+                            <Grid item>
+                                <Select onChange = {handleOnChange} value = {pokemonSelected.selectorText} defaultValue = "front_default" variant = "outlined">
+                                        {pokemonSelectValues}
+                                </Select>
+                            </Grid>
+                            <Grid item>
+                                <IconButton color = "primary" onClick = {props.removePokemon.bind(PokemonCard, props.pokemon)}>
+                                    <ClearIcon/>
+                                </IconButton>
+                            </Grid>
+                        </Grid>
                     </CardActions>
                     
                     <CardMedia
