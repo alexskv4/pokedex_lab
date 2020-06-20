@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import Button from '@material-ui/core/Button'
 import { RouteComponentProps } from 'react-router'
-
+import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container'
 
 const MainView: React.FC <RouteComponentProps> = (props) => {
 
@@ -17,8 +18,10 @@ const MainView: React.FC <RouteComponentProps> = (props) => {
 
     return(
         <div>
-            <Button variant="contained" color="primary" onClick={elephantRoute}>Elephants</Button>
-            <Button variant="contained" color="secondary" onClick={pokemonRoute}>Pokemon</Button>
+            <Grid container justify = "center">
+                <Grid item><Button variant="contained" color="primary" onClick={elephantRoute}>Elephants</Button></Grid>
+                <Grid item><Button variant="contained" color="secondary" onClick={pokemonRoute}>Pokemon</Button></Grid>
+            </Grid>
         </div>
 
 
