@@ -13,6 +13,10 @@ const MainView: React.FC <RouteComponentProps> = (props) => {
     var pokemonRoute = () => {
         props.history.push("/pokemon")
     }
+
+    var pokemonListRoute = () => {
+        props.history.push("/pokemon-list")
+    }
     
     
 
