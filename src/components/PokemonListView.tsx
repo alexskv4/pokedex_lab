@@ -1,9 +1,12 @@
-import React from 'react';
-
+import React, {useState} from 'react';
+import Button from '@material-ui/core/Button';
+import PokemonGrid from './PokemonGrid';
 
 const PokemonListView: React.FC = () => {
     
-    var loadPokemons = () => {
+    const [pokemonList, setPokemonList] = useState(Array<Object>());
+
+    let loadPokemons = () => {
         let url = "https://pokeapi.co/api/v2/pokemon/"
 
         fetch(url, 
@@ -12,11 +15,15 @@ const PokemonListView: React.FC = () => {
                 headers:{"origin":"localhost"},
             })
             .then(res => {return res.json()})
+            .then(resData => {
+                setPokemonList(resData.results[0])
+            })
     }
 
     return(
         <div>
-            hello
+            <Button onClick = {loadPokemons}> load </Button>
+            {pokemonList}
         </div>
     )
 }

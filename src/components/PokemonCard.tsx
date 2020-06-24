@@ -20,7 +20,7 @@ interface PokemonCardProps {
         id?: Number,
         abilities?: string,     
     } 
-    removePokemon: Function
+    removePokemon?: Function
 }
 
 const PokemonCard: React.FC <PokemonCardProps> = (props) => {
@@ -74,7 +74,7 @@ const PokemonCard: React.FC <PokemonCardProps> = (props) => {
                                 </Select>
                             </Grid>
                             <Grid item>
-                                <IconButton color = "primary" onClick = {props.removePokemon.bind(PokemonCard, props.pokemon)}>
+                                <IconButton color = "primary" onClick = {props.removePokemon?.bind(PokemonCard, props.pokemon)}>
                                     <ClearIcon/>
                                 </IconButton>
                             </Grid>

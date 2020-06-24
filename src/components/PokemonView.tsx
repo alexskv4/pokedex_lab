@@ -92,11 +92,11 @@ const PokemonView: React.FC = () => {
         
         
         fetch(url,
-        {
-            method:"GET",
-            headers:{"origin":"localhost"},
-        
-        })
+            {
+                method:"GET",
+                headers:{"origin":"localhost"},
+            
+            })
         .then(res => {return res.json()})
         .then(resData => {
             //console.log(resData)
