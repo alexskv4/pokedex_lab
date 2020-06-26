@@ -10,7 +10,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Divider from '@material-ui/core/Divider';
 import {red, grey} from '@material-ui/core/colors';
 import PressStart2P from './fonts/PressStart2P.ttf';
-
+import Drawer from '@material-ui/core/Drawer';
+import Appbar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
 
 const pressStart2P = {
     fontFamily: 'PressStart2P',
@@ -24,7 +28,7 @@ const PokemonView: React.FC = () => {
 
     let pokemonArr: Array<object> = [];
     console.log(pokemonArr)
-    var darkTheme = createMuiTheme({
+    let darkTheme = createMuiTheme({
         typography:{
             fontFamily: 'PressStart2P',
             fontSize: 12
@@ -46,7 +50,7 @@ const PokemonView: React.FC = () => {
         },
     });
     
-    var lightTheme = createMuiTheme({
+    let lightTheme = createMuiTheme({
         typography:{
             fontFamily: 'PressStart2P',
             fontSize: 12
@@ -70,10 +74,18 @@ const PokemonView: React.FC = () => {
     
     const [pokemons, setPokemons] = useState(Array<Object>());
     const [theme, setTheme] = useState(lightTheme);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const [error, setError] = useState({
         hasError: false,
         errorMessage: "",
     });
+    const handleDrawerOpen = () => {
+        setDrawerOpen(true);
+    }
+
+    const handleDrawerClose = () => {
+        setDrawerOpen(false);
+    }
     
     var changeTheme = (event: any) => {
         setTheme(event.target.checked ? darkTheme : lightTheme)
@@ -140,15 +152,31 @@ const PokemonView: React.FC = () => {
     return(
         <ThemeProvider theme = {theme}>
             <CssBaseline>
+                <Appbar>
+                    <Toolbar>
+                        <IconButton
+                            onClick = {handleDrawerOpen}
+                        >
+                            <MenuIcon/>
+                        </IconButton>
+                        <PokemonTextfield loadPokemon = {loadPokemon} error = {error} clearError = {clearError}/>
+                    </Toolbar>
+                </Appbar>
                 <div>
-                    <h1>
-                        <Grid container spacing = {4} justify = "center" alignItems = "center">
-                            <Grid item><FormControlLabel control = {<Switch color = 'primary' onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
-                            <Grid item><PokemonTextfield loadPokemon = {loadPokemon} error = {error} clearError = {clearError}/></Grid>
-                        </Grid>
-                    </h1>
-                    <h1><Divider/></h1>
-                    <PokemonGrid removePokemon = {removePokemon} pokemonArr = {pokemons}/>
+                    
+                    <Drawer>
+                        bing bong
+                    </Drawer>
+                    <main>
+                        <h1>
+                            <Grid container spacing = {4} justify = "center" alignItems = "center">
+                                <Grid item><FormControlLabel control = {<Switch color = 'primary' onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
+                                <Grid item></Grid>
+                            </Grid>
+                        </h1>
+                        <h1><Divider/></h1>
+                        <PokemonGrid removePokemon = {removePokemon} pokemonArr = {pokemons}/>
+                    </main>
                 </div>
             </CssBaseline>
         </ThemeProvider>
