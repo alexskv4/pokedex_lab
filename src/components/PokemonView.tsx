@@ -15,6 +15,7 @@ import Appbar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
+import BackIcon from '@material-ui/icons/ArrowBackIos';
 
 const pressStart2P = {
     fontFamily: 'PressStart2P',
@@ -98,6 +99,15 @@ const PokemonView: React.FC = () => {
         })
     }
 
+    let loadPokemonList = (url: string) => {
+        fetch(url, 
+            {
+                method: "GET",
+                headers: {"origin" : "localhost"}
+            })
+    }
+
+
     var loadPokemon = (pokemonName: string) => {
 
         var url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName; 
@@ -154,24 +164,37 @@ const PokemonView: React.FC = () => {
             <CssBaseline>
                 <Appbar>
                     <Toolbar>
-                        <IconButton
-                            onClick = {handleDrawerOpen}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <PokemonTextfield loadPokemon = {loadPokemon} error = {error} clearError = {clearError}/>
+                        <Grid container justify = "space-between" alignItems = "center">
+                            <Grid item>
+                                <IconButton onClick = {handleDrawerOpen}>
+                                    <MenuIcon/>
+                                </IconButton>
+                            </Grid>
+                            <Grid item>
+                                <PokemonTextfield loadPokemon = {loadPokemon} error = {error} clearError = {clearError}/>
+                            </Grid>
+                            <Grid item>
+                                <FormControlLabel control = {<Switch color = 'secondary' onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/>
+                            </Grid>
+                        </Grid>
                     </Toolbar>
                 </Appbar>
-                <div>
-                    
-                    <Drawer>
-                        bing bong
+                <div> 
+                    <Drawer variant = "persistent" anchor = "left" open = {drawerOpen}>
+                        <Grid container direction = "column" alignItems = "center">
+                            <Grid item>
+                                <IconButton onClick = {handleDrawerClose}>
+                                    <BackIcon/>
+                                </IconButton>
+                            </Grid>
+                            <Grid item><h1><Divider/></h1></Grid>
+                            <Grid item>bing bong</Grid>
+                        </Grid>
                     </Drawer>
                     <main>
                         <h1>
                             <Grid container spacing = {4} justify = "center" alignItems = "center">
                                 <Grid item><FormControlLabel control = {<Switch color = 'primary' onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
-                                <Grid item></Grid>
                             </Grid>
                         </h1>
                         <h1><Divider/></h1>

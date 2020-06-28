@@ -40,6 +40,7 @@ const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
             <Grid container spacing = {2} alignItems = "center">
                 <Grid item>
                     <TextField
+                        color = "secondary"
                         onChange = {handleOnChange}
                         inputRef={searchInputRef} 
                         error = {props.error.hasError}
