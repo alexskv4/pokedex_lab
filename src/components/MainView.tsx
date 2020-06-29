@@ -14,10 +14,6 @@ const MainView: React.FC <RouteComponentProps> = (props) => {
         props.history.push("/pokemon")
     }
 
-    var pokemonListRoute = () => {
-        props.history.push("/pokemon-list")
-    }
-    
     
 
     return(

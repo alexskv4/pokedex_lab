@@ -16,6 +16,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import BackIcon from '@material-ui/icons/ArrowBackIos';
+import Button from '@material-ui/core/Button';
+import { useEffect } from 'react';
 
 const pressStart2P = {
     fontFamily: 'PressStart2P',
@@ -74,8 +76,11 @@ const PokemonView: React.FC = () => {
     });
     
     const [pokemons, setPokemons] = useState(Array<Object>());
+    const [buttonDisabled, setButtonDisabled] = useState(false)
     const [theme, setTheme] = useState(lightTheme);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [pokemonList, setPokemonList] = useState(Array<Object>());
+    const [pokemonListURL, setPokemonListURL] = useState("https://pokeapi.co/api/v2/pokemon/");
     const [error, setError] = useState({
         hasError: false,
         errorMessage: "",
@@ -99,13 +104,21 @@ const PokemonView: React.FC = () => {
         })
     }
 
-    let loadPokemonList = (url: string) => {
-        fetch(url, 
+    let loadPokemonList = () => {
+        setButtonDisabled(true)
+        fetch(pokemonListURL, 
             {
                 method: "GET",
                 headers: {"origin" : "localhost"}
             })
+        .then(res => {return res.json()})
+        .then (resData => {
+            setPokemonListURL(resData.next)
+            console.log(resData.next)
+        })        
     }
+
+    useEffect(() => {setButtonDisabled(false)}, [pokemonListURL])
 
 
     var loadPokemon = (pokemonName: string) => {
@@ -189,6 +202,7 @@ const PokemonView: React.FC = () => {
                             </Grid>
                             <Grid item><h1><Divider/></h1></Grid>
                             <Grid item>bing bong</Grid>
+                            <Grid item><Button disabled = {buttonDisabled} onClick = {loadPokemonList}>load more</Button></Grid>
                         </Grid>
                     </Drawer>
                     <main>
