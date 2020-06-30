@@ -17,7 +17,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import BackIcon from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import { useEffect } from 'react';
+import shortid from 'shortid';
 
 const pressStart2P = {
     fontFamily: 'PressStart2P',
@@ -27,10 +29,7 @@ const pressStart2P = {
 
 const PokemonView: React.FC = () => {
 
-    // const [pokemons, setPokemons] = useState(Array<Object>([]));
-
-    let pokemonArr: Array<object> = [];
-    console.log(pokemonArr)
+    // console.log(pokemonArr)
     let darkTheme = createMuiTheme({
         typography:{
             fontFamily: 'PressStart2P',
@@ -113,13 +112,14 @@ const PokemonView: React.FC = () => {
             })
         .then(res => {return res.json()})
         .then (resData => {
+            let pokemonListArr = resData.results.map(function(item: any, index: number) {return <Grid item key = {shortid.generate()}><Link onClick = {() => loadPokemon(item.name)}>{item.name}</Link></Grid>})
             setPokemonListURL(resData.next)
+            setPokemonList(pokemonListArr)
             console.log(resData.next)
         })        
     }
 
     useEffect(() => {setButtonDisabled(false)}, [pokemonListURL])
-
 
     var loadPokemon = (pokemonName: string) => {
 
@@ -138,25 +138,23 @@ const PokemonView: React.FC = () => {
 
             const abilityArr = resData.abilities.map(function(item: any) {return item.ability.name})
             
-            pokemonArr.push(
-                {
-                    name: resData["name"], 
-                    weight: resData["weight"], 
-                    height: resData["height"],
-                    images: resData["sprites"],
-                    id: resData["id"],
-                    abilities: abilityArr.toString(),
-                }
-            );
+            let pokemon = {
+                        uuid: shortid.generate(),
+                        name: resData["name"], 
+                        weight: resData["weight"], 
+                        height: resData["height"],
+                        images: resData["sprites"],
+                        id: resData["id"],
+                        abilities: abilityArr.toString(),
+                    }
+  
+            console.log(pokemons)
             
-            // console.log(pokemonArr)
+            setPokemons( pokemons => [...pokemons, pokemon])
 
-            setPokemons(
-                [...pokemons, ...pokemonArr]
-            );
-            // console.log(pokemons)
+            console.log(pokemons)
         })
-        .catch(error => {setError(
+        .catch(er => {setError(
                 {
                     hasError: true,
                     errorMessage: "Please enter a valid Pokemon",
@@ -201,7 +199,7 @@ const PokemonView: React.FC = () => {
                                 </IconButton>
                             </Grid>
                             <Grid item><h1><Divider/></h1></Grid>
-                            <Grid item>bing bong</Grid>
+                            {pokemonList}
                             <Grid item><Button disabled = {buttonDisabled} onClick = {loadPokemonList}>load more</Button></Grid>
                         </Grid>
                     </Drawer>

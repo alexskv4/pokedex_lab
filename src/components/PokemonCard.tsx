@@ -17,7 +17,7 @@ interface PokemonCardProps {
         name?: string,
         weight?: string,
         height?: string,
-        id?: Number,
+        id?: number,
         abilities?: string,     
     } 
     removePokemon: Function
