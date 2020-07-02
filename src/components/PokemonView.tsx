@@ -21,6 +21,7 @@ import Link from '@material-ui/core/Link';
 import { useEffect } from 'react';
 import shortid from 'shortid';
 
+
 const pressStart2P = {
     fontFamily: 'PressStart2P',
     src: `local('PressStart2P'), url(${PressStart2P}) format('truetype')`
@@ -30,6 +31,7 @@ const pressStart2P = {
 const PokemonView: React.FC = () => {
 
     // console.log(pokemonArr)
+
     let darkTheme = createMuiTheme({
         typography:{
             fontFamily: 'PressStart2P',
@@ -114,7 +116,7 @@ const PokemonView: React.FC = () => {
         .then (resData => {
             let pokemonListArr = resData.results.map(function(item: any, index: number) {return <Grid item key = {shortid.generate()}><Link onClick = {() => loadPokemon(item.name)}>{item.name}</Link></Grid>})
             setPokemonListURL(resData.next)
-            setPokemonList(pokemonListArr)
+            setPokemonList([...pokemonList, ...pokemonListArr])
             console.log(resData.next)
         })        
     }
@@ -198,7 +200,7 @@ const PokemonView: React.FC = () => {
                                     <BackIcon/>
                                 </IconButton>
                             </Grid>
-                            <Grid item><h1><Divider/></h1></Grid>
+                            <Grid item><Divider/></Grid>
                             {pokemonList}
                             <Grid item><Button disabled = {buttonDisabled} onClick = {loadPokemonList}>load more</Button></Grid>
                         </Grid>
@@ -209,7 +211,6 @@ const PokemonView: React.FC = () => {
                                 <Grid item><FormControlLabel control = {<Switch color = 'primary' onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
                             </Grid>
                         </h1>
-                        <h1><Divider/></h1>
                         <PokemonGrid removePokemon = {removePokemon} pokemonArr = {pokemons}/>
                     </main>
                 </div>
