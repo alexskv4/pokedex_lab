@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import PokemonTextfield from './PokemonTextfield';
 import PokemonGrid from './PokemonGrid';
-import { createMuiTheme, ThemeProvider, useTheme } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider, createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
@@ -20,6 +20,8 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { useEffect } from 'react';
 import shortid from 'shortid';
+import clsx from 'clsx';
+import { Classes } from '@material-ui/styles/mergeClasses/mergeClasses';
 
 
 const pressStart2P = {
@@ -30,7 +32,58 @@ const pressStart2P = {
 
 const PokemonView: React.FC = () => {
 
-    // console.log(pokemonArr)
+    const drawerWidth = 240;
+
+    const useStyles = makeStyles((theme: Theme) =>
+        createStyles({
+            appBar: {
+                transition: theme.transitions.create(['margin', 'width'], {
+                    easing: theme.transitions.easing.sharp,
+                    duration: theme.transitions.duration.leavingScreen,
+                }),
+            },
+            appBarShift: {
+                width: `calc(100% - ${drawerWidth}px)`,
+                marginLeft: drawerWidth,
+                transition: theme.transitions.create(['margin', 'width'], {
+                  easing: theme.transitions.easing.easeOut,
+                  duration: theme.transitions.duration.enteringScreen,
+                }),
+            },
+            drawer: {
+                width: drawerWidth,
+                flexShrink: 0,
+            },
+            drawerPaper: {
+                width: drawerWidth,
+            },
+            drawerHeader: {
+                display: 'flex',
+                alignItems: 'center',
+                padding: theme.spacing(0, 1),
+                ...theme.mixins.toolbar,
+                justifyContent: 'flex-end',
+            },
+            content: {
+                flexGrow: 1,
+                padding: theme.spacing(3),
+                transition: theme.transitions.create('margin', {
+                  easing: theme.transitions.easing.sharp,
+                  duration: theme.transitions.duration.leavingScreen,
+                }),
+                marginLeft: drawerWidth,
+                marginTop: 50,
+            },
+            contentShift: {
+                transition: theme.transitions.create('margin', {
+                  easing: theme.transitions.easing.easeOut,
+                  duration: theme.transitions.duration.enteringScreen,
+                }),
+                marginLeft: 0,
+                marginTop: 50,
+            },
+        }) 
+    )
 
     let darkTheme = createMuiTheme({
         typography:{
@@ -86,19 +139,17 @@ const PokemonView: React.FC = () => {
         hasError: false,
         errorMessage: "",
     });
-    const handleDrawerOpen = () => {
-        setDrawerOpen(true);
-    }
+    const classes = useStyles();
 
-    const handleDrawerClose = () => {
-        setDrawerOpen(false);
+    const handleDrawer = () => {
+        setDrawerOpen(!drawerOpen);
     }
     
-    var changeTheme = (event: any) => {
+    let changeTheme = (event: any) => {
         setTheme(event.target.checked ? darkTheme : lightTheme)
     }
     
-    var clearError = () => {
+    let clearError = () => {
         setError({
             hasError: false, 
             errorMessage: "", 
@@ -114,7 +165,7 @@ const PokemonView: React.FC = () => {
             })
         .then(res => {return res.json()})
         .then (resData => {
-            let pokemonListArr = resData.results.map(function(item: any, index: number) {return <Grid item key = {shortid.generate()}><Link onClick = {() => loadPokemon(item.name)}>{item.name}</Link></Grid>})
+            let pokemonListArr = resData.results.map(function(item: any, index: number) {return <Grid item key = {shortid.generate()}><Button onClick = {() => loadPokemon(item.name)}>{item.name}</Button></Grid>})
             setPokemonListURL(resData.next)
             setPokemonList([...pokemonList, ...pokemonListArr])
             console.log(resData.next)
@@ -123,9 +174,9 @@ const PokemonView: React.FC = () => {
 
     useEffect(() => {setButtonDisabled(false)}, [pokemonListURL])
 
-    var loadPokemon = (pokemonName: string) => {
+    let loadPokemon = (pokemonName: string) => {
 
-        var url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName; 
+        let url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName; 
         
         
         fetch(url,
@@ -175,11 +226,14 @@ const PokemonView: React.FC = () => {
     return(
         <ThemeProvider theme = {theme}>
             <CssBaseline>
-                <Appbar>
+                <Appbar className = {clsx(classes.appBar, {
+                        [classes.appBarShift]: drawerOpen,
+                    })}
+                >
                     <Toolbar>
                         <Grid container justify = "space-between" alignItems = "center">
                             <Grid item>
-                                <IconButton onClick = {handleDrawerOpen}>
+                                <IconButton onClick = {handleDrawer}>
                                     <MenuIcon/>
                                 </IconButton>
                             </Grid>
@@ -193,24 +247,13 @@ const PokemonView: React.FC = () => {
                     </Toolbar>
                 </Appbar>
                 <div> 
-                    <Drawer variant = "persistent" anchor = "left" open = {drawerOpen}>
+                    <Drawer className = {classes.drawer} classes = {{paper: classes.drawerPaper}} variant = "persistent" anchor = "left" open = {drawerOpen}>
                         <Grid container direction = "column" alignItems = "center">
-                            <Grid item>
-                                <IconButton onClick = {handleDrawerClose}>
-                                    <BackIcon/>
-                                </IconButton>
-                            </Grid>
-                            <Grid item><Divider/></Grid>
                             {pokemonList}
                             <Grid item><Button disabled = {buttonDisabled} onClick = {loadPokemonList}>load more</Button></Grid>
                         </Grid>
                     </Drawer>
-                    <main>
-                        <h1>
-                            <Grid container spacing = {4} justify = "center" alignItems = "center">
-                                <Grid item><FormControlLabel control = {<Switch color = 'primary' onChange = {changeTheme}/>} label = "Dark Theme" labelPlacement = "start"/></Grid>
-                            </Grid>
-                        </h1>
+                    <main className = {clsx(classes.content, {[classes.contentShift]: !drawerOpen,})}>
                         <PokemonGrid removePokemon = {removePokemon} pokemonArr = {pokemons}/>
                     </main>
                 </div>
