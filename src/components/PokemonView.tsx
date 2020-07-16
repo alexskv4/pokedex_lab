@@ -16,6 +16,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import BackIcon from '@material-ui/icons/ArrowBackIos';
+import ForwardIcon from '@material-ui/icons/ArrowForwardIos';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { useEffect } from 'react';
@@ -248,7 +249,7 @@ const PokemonView: React.FC = () => {
                         <Grid container justify = "space-between" alignItems = 'center'>
                             <Grid item>
                                 <IconButton onClick = {handleDrawer}>
-                                    <MenuIcon/>
+                                    {drawerOpen? <BackIcon/> : <ForwardIcon/>}
                                 </IconButton>
                             </Grid>
                             <Grid item>
