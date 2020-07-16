@@ -21,7 +21,7 @@ import Link from '@material-ui/core/Link';
 import { useEffect } from 'react';
 import shortid from 'shortid';
 import clsx from 'clsx';
-import { Classes } from '@material-ui/styles/mergeClasses/mergeClasses';
+
 
 
 const pressStart2P = {
@@ -50,6 +50,9 @@ const PokemonView: React.FC = () => {
                   duration: theme.transitions.duration.enteringScreen,
                 }),
             },
+            toolBar: {
+                height: 80,
+            },
             drawer: {
                 width: drawerWidth,
                 flexShrink: 0,
@@ -72,7 +75,7 @@ const PokemonView: React.FC = () => {
                   duration: theme.transitions.duration.leavingScreen,
                 }),
                 marginLeft: drawerWidth,
-                marginTop: 50,
+                marginTop: 70,
             },
             contentShift: {
                 transition: theme.transitions.create('margin', {
@@ -80,7 +83,7 @@ const PokemonView: React.FC = () => {
                   duration: theme.transitions.duration.enteringScreen,
                 }),
                 marginLeft: 0,
-                marginTop: 50,
+                marginTop: 70,
             },
         }) 
     )
@@ -89,7 +92,6 @@ const PokemonView: React.FC = () => {
         typography:{
             fontFamily: 'PressStart2P',
             fontSize: 12
-            // fontWeightRegular: "bolder"
         },
 
         overrides: {
@@ -97,7 +99,13 @@ const PokemonView: React.FC = () => {
                 '@global': {
                     '@font-face': [pressStart2P]
                 }
-            }
+            },
+            MuiFormHelperText: {
+                root: {
+                    '&$error' : {color: 'black'},
+                },
+                error: {}
+            },
         },
 
         palette:{
@@ -111,7 +119,6 @@ const PokemonView: React.FC = () => {
         typography:{
             fontFamily: 'PressStart2P',
             fontSize: 12
-            //fontWeightRegular: "bolder"
         },
 
         overrides: {
@@ -119,7 +126,13 @@ const PokemonView: React.FC = () => {
                 '@global': {
                     '@font-face': [pressStart2P]
                 }
-            }
+            },
+            MuiFormHelperText: {
+                root: {
+                    '&$error' : {color: 'black'}    
+                },
+                error: {}
+            },
         },
 
         palette:{
@@ -147,6 +160,7 @@ const PokemonView: React.FC = () => {
     
     let changeTheme = (event: any) => {
         setTheme(event.target.checked ? darkTheme : lightTheme)
+        
     }
     
     let clearError = () => {
@@ -228,10 +242,10 @@ const PokemonView: React.FC = () => {
             <CssBaseline>
                 <Appbar className = {clsx(classes.appBar, {
                         [classes.appBarShift]: drawerOpen,
-                    })}
-                >
-                    <Toolbar>
-                        <Grid container justify = "space-between" alignItems = "center">
+                    })}>
+                
+                    <Toolbar className = {classes.toolBar}>
+                        <Grid container justify = "space-between" alignItems = 'center'>
                             <Grid item>
                                 <IconButton onClick = {handleDrawer}>
                                     <MenuIcon/>

@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { styled } from '@material-ui/core/styles';
 
+
 interface PokemonTextFieldProps {
     clearError: Function,
     loadPokemon: Function,
@@ -16,8 +17,9 @@ const StyledButton = styled(Button) ({
     fontWeight: 'bolder',
 });
 
-const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
 
+
+const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
     const searchInputRef = useRef <HTMLInputElement>();
 
     let handleOnChange = () => {
@@ -40,6 +42,7 @@ const PokemonTextfield: React.FC <PokemonTextFieldProps> = (props) => {
             <Grid container spacing = {2} alignItems = "center">
                 <Grid item>
                     <TextField
+                        size = 'small'
                         color = "secondary"
                         onChange = {handleOnChange}
                         inputRef={searchInputRef} 
