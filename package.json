@@ -1,7 +1,8 @@
 {
-  "name": "random-elephants",
+  "name": "pokedex_lab",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.9.14",

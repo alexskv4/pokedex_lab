@@ -10,9 +10,9 @@ const App: React.FC = () => {
   return(
     <Router>
       <Switch>
-        <Route exact path='/' component={MainView}/>
-        <Route path='/pokemon' component={PokemonView}/>
-        <Route path='/elephants' component={ElephantView}/>
+        <Route exact path='/pokedex/' component={MainView}/>
+        <Route path='/pokedex/pokemon' component={PokemonView}/>
+        <Route path='/pokedex/elephants' component={ElephantView}/>
       </Switch>
     </Router>
   )

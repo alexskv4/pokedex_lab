@@ -7,11 +7,11 @@ import Container from '@material-ui/core/Container'
 const MainView: React.FC <RouteComponentProps> = (props) => {
 
     var elephantRoute = () => {
-        props.history.push("/elephants")
+        props.history.push("/pokedex/elephants")
     }
     
     var pokemonRoute = () => {
-        props.history.push("/pokemon")
+        props.history.push("/pokedex/pokemon")
     }
 
     
