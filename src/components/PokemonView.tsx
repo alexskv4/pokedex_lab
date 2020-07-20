@@ -265,7 +265,7 @@ const PokemonView: React.FC = () => {
                     <Drawer className = {classes.drawer} classes = {{paper: classes.drawerPaper}} variant = "persistent" anchor = "left" open = {drawerOpen}>
                         <Grid container direction = "column" alignItems = "center">
                             {pokemonList}
-                            <Grid item><Button disabled = {buttonDisabled} onClick = {loadPokemonList}>load more</Button></Grid>
+                            <Grid item><Button variant = "contained" color = "primary" disabled = {buttonDisabled} onClick = {loadPokemonList}>load more</Button></Grid>
                         </Grid>
                     </Drawer>
                     <main className = {clsx(classes.content, {[classes.contentShift]: !drawerOpen,})}>
